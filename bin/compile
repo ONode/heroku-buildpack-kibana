@@ -70,10 +70,10 @@ if [ ! -f "$CACHE_DIR/$KIBANA_PACKAGE" ]; then
 fi
 
 $extract $CACHE_DIR/$KIBANA_PACKAGE
-
+KIBANA_YML="$KIBANA_DIR/config/kibana.yml"
 echo "-----> Configuring ELASTICSEARCH_URL"
 #$configure $KIBANA_DIR/config/kibana.yml
-echo "elasticsearch.url:\"$ELASTICSEARCH_URL\"" >> $KIBANA_DIR/config/kibana.yml
+echo 'elasticsearch.url:$ELASTICSEARCH_URL' > $KIBANA_YML
 
 echo "-----> set elasticsearch as $ELASTICSEARCH_URL" 
 
