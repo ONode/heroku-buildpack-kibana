@@ -50,6 +50,9 @@ echo "-----> Installing Kibana..."
 
 $mkdir ${INIT_SCRIPT%/*}
 $mkdir $CACHE_DIR
+CONFIG_DIR=$BUILD_DIR/$KIBANA_PACKAGE/config/
+echo "-----> create folder if not exist $CONFIG_DIR"
+$mkdir $CONFIG_DIR
 
 if [ ! -f "$CACHE_DIR/$KIBANA_PACKAGE" ]; then
   echo "downloading $DOWNLOAD_URL" | indent
