@@ -15,8 +15,11 @@ if [ -f "$ENV_DIR/BONSAI_URL" ]; then
 elif [ -f "$ENV_DIR/ELASTICSEARCH_URL" ]; then
   ELASTICSEARCH_URL=$(cat $ENV_DIR/ELASTICSEARCH_URL)
 else
-   ELASTICSEARCH_URL="https://woygrxy:kxs3a7a752xn27y0@cypress-6596621.us-east-1.bonsai.io"
+   ELASTICSEARCH_URL="http://localhost:9200"
 fi
+
+
+  
 #  ELASTICSEARCH_URL="http://localhost:9200"
 if [ -f "$ENV_DIR/DOWNLOAD_URL" ]; then
   DOWNLOAD_URL=$(cat $ENV_DIR/DOWNLOAD_URL)
@@ -41,8 +44,7 @@ mkdir="mkdir -p"
 download="curl -sLO"
 extract="$tar -C $BUILD_DIR --wildcards -f"
 verify="sha1sum --check --warn"
-configure='sed -i s/^\(elasticsearch.url:\x20\).\{1,\}/\1"'$(echo $ELASTICSEARCH_URL | sed 's/\//\\\//g')'"/'
-
+configure='sed -i s/^\(elasticsearch:\x20\).\{1,\}/\1"'$(echo $ELASTICSEARCH_URL | sed 's/\//\\\//g')'"/'
 
 echo "-----> Installing Kibana..."
 
@@ -68,6 +70,7 @@ $extract $CACHE_DIR/$KIBANA_PACKAGE
 
 echo "-----> Configuring ELASTICSEARCH_URL"
 $configure $KIBANA_DIR/config/kibana.yml
+echo "-----> set elasticsearch as $ELASTICSEARCH_URL" 
 
 echo "Exporting PATH" | indent
 echo 'export PATH="$PATH:'${KIBANA_DIR##*/}'/bin"' > $INIT_SCRIPT
