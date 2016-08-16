@@ -76,7 +76,7 @@ echo "-----> Configuring ELASTICSEARCH_URL"
 
 echo "-----> set get the yml $KIBANA_YML" 
 echo "-----> set elasticsearch as $ELASTICSEARCH_URL" 
-echo "elasticsearch.url: \"$ELASTICSEARCH_URL\"" > $KIBANA_YML
+echo "elasticsearch.url: \"$ELASTICSEARCH_URL\"" >| $KIBANA_YML
 
 echo "Exporting PATH" | indent
 echo 'export PATH="$PATH:'${KIBANA_DIR##*/}'/bin"' > $INIT_SCRIPT
